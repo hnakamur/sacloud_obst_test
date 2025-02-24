@@ -6,10 +6,10 @@ import (
 	"io"
 	"strings"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/credentials"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
-	"github.com/aws/aws-sdk-go/aws"
 )
 
 type myS3Config struct {
@@ -43,6 +43,7 @@ func newMyS3Service(ctx context.Context, cfg myS3Config) (*myS3Service, error) {
 		// 参照
 		o.BaseEndpoint = aws.String(cfg.EndpointURL)
 		o.UsePathStyle = cfg.UsePathStyle
+		o.RequestChecksumCalculation = aws.RequestChecksumCalculationWhenRequired
 	})
 
 	return &myS3Service{client: svc, cfg: cfg}, nil
