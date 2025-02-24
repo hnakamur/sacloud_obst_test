@@ -44,6 +44,7 @@ func newMyS3Service(ctx context.Context, cfg myS3Config) (*myS3Service, error) {
 		o.BaseEndpoint = aws.String(cfg.EndpointURL)
 		o.UsePathStyle = cfg.UsePathStyle
 		o.RequestChecksumCalculation = aws.RequestChecksumCalculationWhenRequired
+		o.ResponseChecksumValidation = aws.ResponseChecksumValidationWhenRequired
 	})
 
 	return &myS3Service{client: svc, cfg: cfg}, nil
